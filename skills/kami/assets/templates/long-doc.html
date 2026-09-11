@@ -17,22 +17,8 @@
   @font-face { font-family: "JetBrains Mono"; src: url("../fonts/JetBrainsMono.woff2") format("woff2"); font-weight: 500; font-style: normal; }
 
   /* Regular weight */
-  @font-face {
-    font-family: "TsangerJinKai02";
-    src: url("../fonts/TsangerJinKai02-W04.ttf") format("truetype"),
-       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/TsangerJinKai02-W04.ttf") format("truetype");
-    font-weight: 400;
-    font-style: normal;
-  }
 
   /* Bold weight - W05 for all bold variants */
-  @font-face {
-    font-family: "TsangerJinKai02";
-    src: url("../fonts/TsangerJinKai02-W05.ttf") format("truetype"),
-       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/TsangerJinKai02-W05.ttf") format("truetype");
-    font-weight: 500;
-    font-style: normal;
-  }
 
   @page {
     size: A4;
@@ -41,16 +27,16 @@
 
     @top-right {
       content: string(section-title);
-      font-family: "TsangerJinKai02", "Source Han Serif SC",
-                   "Noto Serif CJK SC", "Songti SC", Georgia, serif;
+      font-family: "Source Han Sans SC VF", "Source Han Sans SC",
+                   "Noto Sans CJK SC", "PingFang SC", Arial, sans-serif;
       font-size: 8pt;
       color: #6b6a64;
     }
 
     @bottom-center {
       content: counter(page) "  ·  {{文档标题}}";
-      font-family: "TsangerJinKai02", "Source Han Serif SC",
-                   "Noto Serif CJK SC", "Songti SC", Georgia, serif;
+      font-family: "Source Han Sans SC VF", "Source Han Sans SC",
+                   "Noto Sans CJK SC", "PingFang SC", Arial, sans-serif;
       font-size: 9pt;
       color: #6b6a64;
     }
@@ -74,7 +60,7 @@
     --border:    #e8e6dc;
     --border-soft:#e5e3d8;
     --tag-bg:    #E4ECF5;
-    --serif: "TsangerJinKai02", "Source Han Serif SC", "Source Han Serif CN", "Noto Serif CJK SC", "Noto Serif SC", "Songti SC", "STSong", "SimSun", Georgia, serif;
+    --serif: "Source Han Sans SC VF", "Source Han Sans SC", "Noto Sans CJK SC", "Noto Sans SC", "PingFang SC", Arial, sans-serif;
     --sans: var(--serif);
 
     --rhythm-module:  14pt;
@@ -273,8 +259,8 @@
      a mono font with CJK coverage. */
   code {
     font-family: "JetBrains Mono", "SF Mono", Consolas,
-                 "TsangerJinKai02", "Source Han Serif SC",
-                 "Noto Serif CJK SC", "Songti SC", monospace;
+                 "Source Han Sans SC VF", "Source Han Sans SC",
+                 "Noto Sans CJK SC", "PingFang SC", monospace;
     font-size: 9pt;
     background: var(--ivory);
     padding: 1pt 4pt;
@@ -283,8 +269,8 @@
   }
   pre {
     font-family: "JetBrains Mono", "SF Mono", Consolas,
-                 "TsangerJinKai02", "Source Han Serif SC",
-                 "Noto Serif CJK SC", "Songti SC", monospace;
+                 "Source Han Sans SC VF", "Source Han Sans SC",
+                 "Noto Sans CJK SC", "PingFang SC", monospace;
     font-size: 9pt;
     line-height: 1.5;
     background: var(--ivory);
@@ -552,7 +538,7 @@
   <figure>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 280" width="420" height="280" style="background:#f5f4ed">
         <style>
-          text { font-family: "TsangerJinKai02", "Source Han Serif SC", "Source Han Serif CN", "Noto Serif CJK SC", "Noto Serif SC", "Songti SC", "STSong", "SimSun", Charter, Georgia, serif; }
+          text { font-family: "Source Han Sans SC VF", "Source Han Sans SC", "Noto Sans CJK SC", "Noto Sans SC", "PingFang SC", Charter, Arial, sans-serif; }
         </style>
         <defs>
           <marker id="seq-arrow" markerWidth="8" markerHeight="5" refX="8" refY="2.5" orient="auto-start-reverse">
