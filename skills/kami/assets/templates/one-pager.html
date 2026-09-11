@@ -15,22 +15,8 @@
 <meta name="generator" content="Kami">
 <style>
   /* Regular weight */
-  @font-face {
-    font-family: "TsangerJinKai02";
-    src: url("../fonts/TsangerJinKai02-W04.ttf") format("truetype"),
-       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/TsangerJinKai02-W04.ttf") format("truetype");
-    font-weight: 400;
-    font-style: normal;
-  }
 
   /* Bold weight - W05 for all bold variants */
-  @font-face {
-    font-family: "TsangerJinKai02";
-    src: url("../fonts/TsangerJinKai02-W05.ttf") format("truetype"),
-       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/TsangerJinKai02-W05.ttf") format("truetype");
-    font-weight: 500;
-    font-style: normal;
-  }
 
   @page {
     size: A4;
@@ -50,7 +36,7 @@
     --border:    #e8e6dc;
     --border-soft:#e5e3d8;
     --tag-bg:    #E4ECF5;
-    --serif: "TsangerJinKai02", "Source Han Serif SC", "Source Han Serif CN", "Noto Serif CJK SC", "Noto Serif SC", "Songti SC", "STSong", "SimSun", Georgia, serif;
+    --serif: "Source Han Sans SC VF", "Source Han Sans SC", "Noto Sans CJK SC", "Noto Sans SC", "PingFang SC", Arial, sans-serif;
     --sans: var(--serif);
   }
 
@@ -93,7 +79,7 @@
     margin-bottom: 7pt;
     font-weight: 500;
   }
-  /* CN locale tuning: TsangerJinKai glyphs are wider per character, so H1 sits
+  /* CN locale tuning: Source Han Sans SC VF glyphs are wider per character, so H1 sits
      slightly smaller (24pt vs EN 26pt) with looser leading (1.15 vs EN 1.12)
      to keep optical density aligned across the two locales. */
   h1 {
