@@ -134,21 +134,21 @@ def test_font_family_key_collapses_weight_variants() -> None:
           _font_family_key("Songti-SC") != _font_family_key("Hiragino-Mincho-ProN-Lig"))
 
 
-def test_classify_cjk_font_separates_serif_from_the_rest() -> None:
+def test_classify_cjk_font_separates_primary_and_fallbacks() -> None:
     """The gate exists because a sans substitution shows no fallback boxes.
 
-    A missing CJK serif is invisible to an eyeball pass: the page still reads,
-    just with the wrong stroke density against metrics tuned for serif. The
+    A missing CJK font is invisible to an eyeball pass: the page still reads,
+    just with the wrong stroke density against Kami's metrics. The
     classifier is what turns that into a failure.
     """
     cases = {
-        "ABCDEF+TsangerJinKai02-W04": "primary",
+        "ABCDEF+SourceHanSansSCVF-Regular": "primary",
         "Songti-SC": "serif",
         "NotoSerifCJKsc-Regular": "serif",
         "Noto Serif CJK SC": "serif",
-        "PingFang-SC": "other",
-        "NotoSansCJKsc-Regular": "other",
-        "SourceHanSansSC-Regular": "other",
+        "PingFang-SC": "serif",
+        "NotoSansCJKsc-Regular": "serif",
+        "SourceHanSansSC-Regular": "primary",
         # Korean Myeongjo is a serif; the KO stacks fall back to it offline.
         "ABCDEF+Nanum-Myeongjo": "serif",
         "AppleMyungjo": "serif",
@@ -159,7 +159,7 @@ def test_classify_cjk_font_separates_serif_from_the_rest() -> None:
         for name, want in cases.items()
         if _classify_cjk_font(name) != want
     ]
-    check("CJK font classifier separates primary and serif from everything else",
+    check("CJK font classifier separates primary and fallbacks from everything else",
           not offenders,
           f"offenders: {', '.join(offenders)}")
 
@@ -518,7 +518,7 @@ def test_verify_target_requires_exactly_two_resume_pages() -> None:
     original_render = verify_mod.render_pdf
     original_fonts = verify_mod._pdf_font_names
     try:
-        verify_mod._pdf_font_names = lambda _: {"ABCDEF+TsangerJinKai02-W04"}
+        verify_mod._pdf_font_names = lambda _: {"ABCDEF+SourceHanSansSCVF-Regular"}
         results = {}
         for page_count in (1, 2, 3):
             verify_mod.render_pdf = lambda _src, _out, n=page_count: n

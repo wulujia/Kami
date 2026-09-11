@@ -14,22 +14,8 @@
 <meta name="generator" content="Kami">
 <style>
   /* Regular weight */
-  @font-face {
-    font-family: "TsangerJinKai02";
-    src: url("../fonts/TsangerJinKai02-W04.ttf") format("truetype"),
-       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/TsangerJinKai02-W04.ttf") format("truetype");
-    font-weight: 400;
-    font-style: normal;
-  }
 
   /* Bold weight - W05 for all bold variants */
-  @font-face {
-    font-family: "TsangerJinKai02";
-    src: url("../fonts/TsangerJinKai02-W05.ttf") format("truetype"),
-       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/TsangerJinKai02-W05.ttf") format("truetype");
-    font-weight: 500;
-    font-style: normal;
-  }
 
   @page {
     size: A4;
@@ -48,7 +34,7 @@
     --ivory:     #faf9f5;
     --border:    #e8e6dc;
     --border-soft:#e5e3d8;
-    --serif: "TsangerJinKai02", "Source Han Serif SC", "Source Han Serif CN", "Noto Serif CJK SC", "Noto Serif SC", "Songti SC", "STSong", "SimSun", Georgia, serif;
+    --serif: "Source Han Sans SC VF", "Source Han Sans SC", "Noto Sans CJK SC", "Noto Sans SC", "PingFang SC", Arial, sans-serif;
     --sans: var(--serif);
   }
 
@@ -128,7 +114,7 @@
     text-transform: uppercase;
     margin-bottom: 3pt;
   }
-  /* CN locale tuning: TsangerJinKai glyphs read denser, so the subject title
+  /* CN locale tuning: Source Han Sans SC VF glyphs read denser, so the subject title
      sits one step smaller than EN (15pt vs 16pt) with looser leading. */
   .subject .title {
     font-size: 15pt;

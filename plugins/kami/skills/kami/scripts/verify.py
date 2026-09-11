@@ -36,15 +36,18 @@ from shared import (
 )
 
 # Primary fonts expected in embedded PDF font names
-CN_PRIMARY_FONTS = {"TsangerJinKai02"}
+CN_PRIMARY_FONTS = {"SourceHanSansSCVF", "SourceHanSansSC", "Source-Han-Sans-SC"}
 EN_PRIMARY_FONTS = {"Charter"}
 KO_PRIMARY_FONTS = {"Source-Han-Serif-K", "SourceHanSerifK"}
 
 # Serif families that keep a CJK page readable when the primary is unavailable.
 # Falling through to one of these is a degradation, not a defect: the page still
-# carries the serif texture every size, tracking and leading value was tuned for.
-CJK_SERIF_MARKERS = (
-    "TsangerJinKai",
+# carries the single-family texture every size, tracking and leading value was tuned for.
+CJK_FALLBACK_MARKERS = (
+    "SourceHanSans",
+    "NotoSansCJK",
+    "NotoSansSC",
+    "PingFang",
     "SourceHanSerif",
     "NotoSerifCJK",
     "NotoSerifSC",
@@ -74,7 +77,7 @@ RECOGNIZABLE_FALLBACK_FONT_MARKERS = (
     "Palatino",
     "PT-Serif",
     "PTSerif",
-    "TsangerJinKai",
+    "SourceHanSans",
     "YuMincho",
     "Hiragino",
     "SourceHan",
@@ -152,7 +155,7 @@ def _classify_cjk_font(font_name: str) -> str:
     normalized = _normalize_font_name(font_name)
     if any(_normalize_font_name(m) in normalized for m in CN_PRIMARY_FONTS | KO_PRIMARY_FONTS):
         return "primary"
-    if any(_normalize_font_name(m) in normalized for m in CJK_SERIF_MARKERS):
+    if any(_normalize_font_name(m) in normalized for m in CJK_FALLBACK_MARKERS):
         return "serif"
     return "other"
 
@@ -231,8 +234,8 @@ def _font_family_key(name: str) -> str:
 
 
 FONT_RECOVERY_HINT = (
-    "  fix: bash scripts/ensure-fonts.sh (installs a CJK serif into the user font dir), "
-    "or `brew install --cask font-source-han-serif-sc` on macOS, "
+    "  fix: bash scripts/ensure-fonts.sh (installs a CJK font into the user font dir), "
+    "or `brew install --cask font-source-han-sans-vf` on macOS, "
     "or `apt-get install fonts-noto-cjk` on Linux, then render again"
 )
 
@@ -241,7 +244,7 @@ def check_fonts(paths: list[str]) -> int:
     """CLI: --check-fonts doc.pdf [more.pdf ...]
 
     Deterministic gate on the one failure a perceptual pass reliably misses.
-    A missing CJK serif does not produce fallback boxes; it silently swaps in a
+    A missing CJK font does not produce fallback boxes; it silently swaps in a
     sans that still reads, so both the agent and the author sign off on a page
     whose typography is no longer the system's. The rendered PDF's own span
     table settles it: whichever font drew the body ideographs is the verdict.
@@ -301,7 +304,7 @@ def check_fonts(paths: list[str]) -> int:
             detail = ", ".join(f"{name} ({chars})" for name, chars in sorted(others))
             print(f"ERROR: {rel}: CJK text split across families: {font} ({font_chars}), {detail}")
             print("  per-glyph fallback breaks single words across two typefaces; "
-                  "one page carries one serif")
+                  "one page carries one CJK family")
             print(FONT_RECOVERY_HINT)
             failures += 1
             continue
@@ -310,11 +313,11 @@ def check_fonts(paths: list[str]) -> int:
         if verdict == "primary":
             print(f"OK: {rel}: CJK body text in {font} ({count} ideographs)")
         elif verdict == "serif":
-            print(f"WARN: {rel}: CJK body text in {font}, a serif fallback, not the kami primary")
+            print(f"WARN: {rel}: CJK body text in {font}, a CJK fallback, not the kami primary")
             print("  acceptable, but the page is not the reference rendering")
         else:
-            print(f"ERROR: {rel}: CJK body text in {font}, not a CJK serif")
-            print("  the parchment metrics are tuned for serif stroke density; a sans "
+            print(f"ERROR: {rel}: CJK body text in {font}, not a CJK font")
+            print("  the parchment metrics are tuned for CJK stroke density; a sans "
                   "substitution reads heavier and flatter at the same size, with no "
                   "fallback box to make it obvious")
             print(FONT_RECOVERY_HINT)
@@ -452,7 +455,7 @@ def verify_target(name: str, source: str, max_pages: int, src_dir: Path) -> list
             print(f"  [FONT MISS] {name}: {mf} not found")
         print(f"  [FONT MISS] Repo checkout fix: bash scripts/ensure-fonts.sh (copies the tracked fonts from the repository root into assets/fonts)")
         print(f"  [FONT MISS] Skill recovery (downloads to the user font dir, not the skill): bash scripts/ensure-fonts.sh")
-        print(f"  [FONT MISS] Fallback: brew install --cask font-source-han-serif-sc")
+        print(f"  [FONT MISS] Fallback: brew install --cask font-source-han-sans-vf")
 
     out = EXAMPLES / f"{name}.pdf"
     try:
