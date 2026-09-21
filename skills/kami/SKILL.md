@@ -7,7 +7,7 @@ description: 'Typeset professional documents with Kami templates: resumes, one-p
 
 **紙 · かみ** means paper in Japanese.
 
-Good content deserves good paper. Use Kami’s templates and layout rules to create documents and landing pages with serif fonts, warm backgrounds, and ink-blue accents.
+Good content deserves good paper. Use Kami’s templates and layout rules to create documents and landing pages with serif English fonts and Source Han Sans SC VF for Chinese, warm backgrounds, and ink-blue accents.
 
 Part of `Kaku · Waza · Kami` - Kaku writes code, Waza drills habits, **Kami delivers documents**.
 
@@ -173,7 +173,7 @@ Other surfaces:
 
 - **Landing pages and any browser surface**: `--deliver` checks the HTML only. Screenshot the responsive matrix in every shipped locale before calling it done (`references/design.md` «Responsive screenshot verification»); do not wait for the user to ask about mobile.
 - **Editable PPTX**: `python3 scripts/build.py --verify slides` (or `slides-en`) and `--check-rhythm`.
-- **Missing dependencies or fonts**: `python3 scripts/build.py --doctor` reports what is installed; `bash scripts/ensure-fonts.sh` recovers CJK fonts (the commercial TsangerJinKai02 never ships inside the skill package). Render failures and their fixes: `references/production.md` Part 4.
+- **Missing dependencies or fonts**: `python3 scripts/build.py --doctor` reports what is installed; `bash scripts/ensure-fonts.sh` recovers CJK fonts (the bundled TsangerJinKai02 never ships inside the skill package). Render failures and their fixes: `references/production.md` Part 4.
 
 **Fresh review.** After `READY` and the image pass, review once from the contract rather than from your own rationale: reread `brief`, the coverage result, and the page images; check every acceptance item and `preserve` boundary; fix P0/P1 findings, each tied to the page or element that proves it. Use an isolated reviewer when the host has one.
 
